@@ -141,7 +141,9 @@ coco2017_dataset = dataset_base.copy({
     'name': 'COCO 2017',
     
     'train_info': './data/coco/annotations/instances_train2017.json',
+    #'train_info': './data/coco/annotations',
     'valid_info': './data/coco/annotations/instances_val2017.json',
+    #'train_info': './data/coco/annotations',
 
     'label_map': COCO_LABEL_MAP
 })
@@ -153,6 +155,19 @@ coco2017_testdev_dataset = dataset_base.copy({
     'has_gt': False,
 
     'label_map': COCO_LABEL_MAP
+})
+
+my_custom_dataset = dataset_base.copy({
+    'name': 'My Dataset',
+
+    'train_images': '/content/yolact/data/coco/images',
+    'train_info':   '/content/yolact/data/coco/annotations/labels_20.json',
+
+    'valid_images': '/content/yolact/data/coco/images',
+    'valid_info':   '/content/yolact/data/coco/annotations/labels_20.json',
+
+    'has_gt': True,
+    'class_names': ('1')
 })
 
 PASCAL_CLASSES = ("aeroplane", "bicycle", "bird", "boat", "bottle",
@@ -430,7 +445,8 @@ coco_base_config = Config({
 
     # For each lr step, what to multiply the lr with
     'gamma': 0.1,
-    'lr_steps': (280000, 360000, 400000),
+    #'lr_steps': (280000, 360000, 400000),
+    'lr_steps': (50, 100, 150, 200, 250, 300, 350, 400),
 
     # Initial learning rate to linearly warmup from (if until > 0)
     'lr_warmup_init': 1e-4,
@@ -657,14 +673,15 @@ yolact_base_config = coco_base_config.copy({
     'name': 'yolact_base',
 
     # Dataset stuff
-    'dataset': coco2017_dataset,
-    'num_classes': len(coco2017_dataset.class_names) + 1,
+    #'dataset': coco2017_dataset,
+    'dataset': my_custom_dataset,
+    'num_classes': len(my_custom_dataset.class_names) + 1,
 
     # Image Size
     'max_size': 550,
     
     # Training params
-    'lr_steps': (280000, 600000, 700000, 750000),
+    'lr_steps': (50, 100, 150, 200, 250, 300, 350, 400),
     'max_iter': 800000,
     
     # Backbone Settings

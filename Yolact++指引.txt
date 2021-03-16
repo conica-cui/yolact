@@ -1,0 +1,37 @@
+Yolact++指引
+*******************************************************************
+摘要
+Yolact++在2D图上分割零件，并根据2D分割结果在3D点云上‘抠’出目标点云
+*******************************************************************
+说明：
+1.权重文件在weight文件夹下。
+2.原始点云在ply文件夹下。
+3.上述ply文件夹下的原始点云仅做为测试使用，部署时根据深度相机来直接获取点云信息。
+4.args_input文件夹存放的是原始2D图像，仅供测试使用（当做新测试时，即更换测试用例的2D图像时，需要将args_input文件夹删除，之后重新创建一个同名文件夹，再把新的测试用例放入）。
+5.上述args_input文件夹存放的是原始2D图像，仅供测试使用，部署时再据深度相机来直接获取2D图像信息。
+
+*******************************************************************
+环境配置
+1.安装opend3d
+(参考方式：pip install open3d)
+
+2.安装cython，opencv-python pillow pycocotools matplotlib
+（参考方式：pip install cython）
+（参考方式：pip install opencv-python pillow pycocotools matplotlib）
+
+3.安装torch1.5.1+cu101 和torchvision 0.6.1+cu101(yolact++目前在torch版本不高于1.5.1的环境下运行)
+(参考方式：pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html)
+
+4.去到Yolact++/scripts/external/DCNv2目录下:
+cd  Yolact++/scripts/external/DCNv2
+
+5.编译DCNv2:
+python setup.py build develop
+
+************************************************************************
+运行：
+1.去到Yolact++/scripts目录下：
+cd Yolact++/scripts
+
+2.运行（运行后会生成一个pcl_afterter.ply的点云文件，即是过滤后的点云）：
+python eval.py

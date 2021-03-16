@@ -71,6 +71,7 @@ class COCODetection(data.Dataset):
             target_transform = COCOAnnotationTransform()
 
         self.root = image_path
+        
         self.coco = COCO(info_file)
         
         self.ids = list(self.coco.imgToAnns.keys())
@@ -138,6 +139,7 @@ class COCODetection(data.Dataset):
             file_name = file_name.split('_')[-1]
 
         path = osp.join(self.root, file_name)
+        #print('path',path)
         assert osp.exists(path), 'Image path does not exist: {}'.format(path)
         
         img = cv2.imread(path)
