@@ -29,10 +29,17 @@ sudo -E python3 setup.py build develop
 
 
 ## Run and evalute different items
-- Download weights and test data :
-  https://pan.baidu.com/s/13egX-KK2KhLDM3UdUqUuNg  password: 1234 
+- Weight(models) for differenct items are located at folder model, please run combin.sh to generate the weight files.
 
-- Modify the path in eval.py (eg:weight file: .pth ; png file: .png ; ply file: .ply). Make sure the png and ply file are same name.
+  
+```Shell
+# yolact_plus_base.pth will be generated under each folder
+ cd model
+ sh combine.sh
+ ```
+
+
+- Modify the model_id in eval.py (currently support 4 items: 4 5 6 7), and then run the eval.py
   
 ```Shell
 # Quantitatively evaluate a trained model on the entire validation set. Make sure you have COCO downloaded as above.
