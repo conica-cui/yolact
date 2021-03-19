@@ -412,10 +412,10 @@ def init(weight_path):
 
 
 if __name__ == '__main__':
-    #cloud = o3d.io.read_point_cloud("input/1.ply", remove_nan_points=False)
-    net = init('weight/yolact_plus_base.pth')
-    cloud = pcl.load("input/1.ply")
-    img = cv2.imread("input/1.png")
+    model_id = 4
+    net = init('model/' + str(model_id) + '/yolact_plus_base.pth')
+    cloud = pcl.load('input/' + str(model_id) +  '/1.ply')
+    img = cv2.imread('input/' + str(model_id) + '/1.png')
     
     with torch.no_grad():
         output = eval_image(net, cloud, img)    
